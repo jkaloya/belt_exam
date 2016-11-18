@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>Belt Exam</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'beltexamapp/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+  </head>
+  <body>
+        <div id="wrapper">
+            <h3>Welcome {{ user.first_name }} {{ user.last_name }}!</h3>
+        </div>
+        <div id='lower'>
+            <h4>Your Wish List:</h4>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Added by</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td><form action='/remove/{{item.id}}' method='POST'>{% csrf_token %}<input type='submit' value='Remove from my Wishlist'></form></td>}
+                </tr>
+            </table>
+            <form action='/add_item'>
+                {% csrf_token %}
+                <input type='submit' name='add_item' value='Add Item'/>
+            </form>
+            <form action='/logout'>
+                {% csrf_token %}
+                <input type='submit' name='logout' value='Logout'/>
+            </form>
+        </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Belt Exam</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'beltexamapp/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class='box'>
+                <h3>Create a New Wishlist Item:</h3>
+                <form action='/create' method='post'>
+                    {% csrf_token %}
+                    <p>Item/Product: <input type="text" name="item"></p>
+                    <input type='submit' name='insert_item' value='Add Item'/>
+                </form>
+                {% if messages %}
+                    <ul class='messages'>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <form action='/home'>
+                {% csrf_token %}
+                <input type='submit' name='home' value='Home'/>
+            </form>
+            <form action='/logout'>
+                {% csrf_token %}
+                <input type='submit' name='logout' value='Logout'/>
+            </form>
+            </div>
+    </body>
+</html>
